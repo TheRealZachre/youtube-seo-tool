@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "youtube-seo-tool",
+  "workers_dev": true,
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-06-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "youtube-seo-tool"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "youtubeseo.vibecodeflow.com",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "CLOUDFLARE_WORKERS": "1",
+    "YOUTUBE_CHANNEL": "@BeOneMedicines"
+  }
+}

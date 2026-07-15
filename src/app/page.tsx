@@ -1,65 +1,136 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BarChart3,
+  Package,
+  Plug,
+  Sparkles,
+} from "lucide-react";
+import { SEO_SCORE_FACTORS, VCF_BRAND, VCF_PRODUCT_NAME } from "@/lib/brand";
 
-export default function Home() {
+const STEPS = [
+  {
+    icon: Plug,
+    title: "Connect",
+    body: "Pull @BeOneMedicines (or any channel) via the YouTube Data API — or demo with the curated seed library.",
+    href: "/channel",
+  },
+  {
+    icon: Sparkles,
+    title: "Score",
+    body: "Weighted SEO score across title, description, tags, thumbnail, retention, and engagement.",
+    href: "/channel",
+  },
+  {
+    icon: Package,
+    title: "Generate",
+    body: "Ship an optimized title, description with chapters, tags, thumbnail overlays, and end-screen notes.",
+    href: "/packages",
+  },
+  {
+    icon: BarChart3,
+    title: "Track",
+    body: "Watch impressions, CTR, view velocity, and keyword share of voice against competitors.",
+    href: "/visibility",
+  },
+] as const;
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="mx-auto max-w-6xl px-5 pb-20 pt-10 sm:pt-16">
+      <section className="relative overflow-hidden rounded-3xl bg-navy px-6 py-14 text-white shadow-[0_24px_80px_rgba(11,31,58,0.28)] sm:px-12 sm:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-16 top-0 h-64 w-64 rounded-full bg-sky/30 blur-3xl animate-pulse-soft" />
+          <div className="absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
+          <div
+            className="absolute inset-0 opacity-[0.12]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.35) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+        </div>
+
+        <div className="relative max-w-2xl">
+          <p className="animate-rise font-display text-3xl font-semibold tracking-tight text-gold-soft sm:text-4xl md:text-5xl">
+            {VCF_BRAND}
           </p>
+          <h1 className="animate-rise-delay mt-3 font-display text-2xl font-medium leading-tight text-white sm:text-3xl">
+            {VCF_PRODUCT_NAME} for channels that need to be found
+          </h1>
+          <p className="animate-rise-delay-2 mt-4 max-w-xl text-base leading-relaxed text-sky-soft/95 sm:text-lg">
+            Score every upload, generate a full SEO package, and track visibility
+            lift — starting with BeOne Medicines.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/channel"
+              className="inline-flex items-center gap-2 rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-navy-deep transition hover:bg-gold-soft"
+            >
+              Connect @BeOneMedicines
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/visibility"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              View visibility
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="font-display text-2xl font-semibold text-navy">
+          Connect → Score → Generate → Track
+        </h2>
+        <p className="mt-2 max-w-2xl text-muted">
+          One pipeline from channel ingest to packaged SEO and measurable lift.
+        </p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((step, i) => (
+            <Link
+              key={step.title}
+              href={step.href}
+              className="group rounded-2xl border border-line bg-surface p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-sky/40 hover:shadow-md"
+              style={{ animationDelay: `${i * 80}ms` }}
+            >
+              <step.icon className="h-6 w-6 text-sky" />
+              <h3 className="mt-3 font-display text-lg font-semibold text-navy group-hover:text-sky">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{step.body}</p>
+            </Link>
+          ))}
         </div>
-      </main>
+      </section>
+
+      <section className="mt-16 rounded-2xl border border-line bg-white/70 p-6 sm:p-8">
+        <h2 className="font-display text-xl font-semibold text-navy">
+          How videos are scored
+        </h2>
+        <p className="mt-1 text-sm text-muted">
+          Weighted factors matching the product brief — title 25%, description
+          20%, tags 15%, thumbnail / retention / engagement 40%.
+        </p>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {SEO_SCORE_FACTORS.map((factor) => (
+            <li
+              key={factor.key}
+              className="flex items-start gap-3 rounded-xl bg-cream/80 px-4 py-3"
+            >
+              <span className="font-display text-lg font-semibold text-gold">
+                {factor.weight}%
+              </span>
+              <div>
+                <p className="font-medium text-ink">{factor.label}</p>
+                <p className="text-sm text-muted">{factor.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
