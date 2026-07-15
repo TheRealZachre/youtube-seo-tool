@@ -17,6 +17,11 @@ upload_status=${PIPESTATUS[0]}
 set -e
 
 if [ "$upload_status" -ne 0 ]; then
+  if grep -q "does not yet exist" "$upload_log"; then
+    echo "Worker not created yet — running full wrangler deploy..."
+    npx wrangler deploy
+    exit 0
+  fi
   echo "ERROR: opennextjs-cloudflare upload failed with exit code ${upload_status}." >&2
   exit "$upload_status"
 fi
