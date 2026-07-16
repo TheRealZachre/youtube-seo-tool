@@ -43,6 +43,7 @@ export const SEO_SCORE_FACTORS = [
 
 export const NAV_LINKS = [
   { href: "/channel", label: "Channel" },
+  { href: "/generate-seo", label: "Generator" },
   { href: "/packages", label: "Packages" },
   { href: "/visibility", label: "Visibility" },
 ] as const;

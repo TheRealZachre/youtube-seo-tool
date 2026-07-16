@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ChannelConnectForm } from "@/components/channel-connect-form";
 import { FactorBars, ScoreBadge, formatCount } from "@/components/score-ui";
-import { analyzeChannel, getDefaultChannelInput } from "@/lib/youtube/channel";
+import { analyzeChannel } from "@/lib/youtube/channel";
 
 export const metadata: Metadata = {
   title: "Channel library",
@@ -14,7 +14,45 @@ type PageProps = {
 
 export default async function ChannelPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const channelInput = params.channel?.trim() || getDefaultChannelInput();
+  const channelInput = params.channel?.trim() ?? "";
+
+  // Show empty state when no channel has been entered
+  if (!channelInput) {
+    return (
+      <div className="mx-auto max-w-6xl px-5 py-10">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-wider text-sky">
+              Connect · Score
+            </p>
+            <h1 className="mt-1 font-display text-3xl font-semibold text-navy">
+              Channel library
+            </h1>
+            <p className="mt-2 max-w-xl text-muted">
+              Enter a YouTube channel handle or URL to score every video and identify SEO gaps.
+            </p>
+          </div>
+          <div className="w-full max-w-md">
+            <ChannelConnectForm defaultChannel="" />
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-dashed border-line bg-white/50 px-6 py-16 text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-sky/10">
+            <svg className="h-7 w-7 text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0016.803 15.803z" />
+            </svg>
+          </div>
+          <p className="font-display text-lg font-semibold text-navy">No channel connected yet</p>
+          <p className="max-w-sm text-sm text-muted">
+            Enter a YouTube channel handle (e.g. <code className="rounded bg-navy/5 px-1 py-0.5 font-mono text-xs">@mkbhd</code>) or
+            a full URL above to pull video data and generate SEO scores.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const data = await analyzeChannel(channelInput);
   const avgScore =
     data.videos.length === 0
@@ -60,7 +98,7 @@ export default async function ChannelPage({ searchParams }: PageProps) {
               @{data.channel.handle.replace("@", "")}
             </span>
             <span className="rounded-md bg-navy/5 px-2 py-0.5 text-xs font-medium text-muted">
-              {data.source === "youtube-api" ? "Live YouTube API" : "Seed demo"}
+              {data.source === "youtube-api" ? "Live YouTube API" : "Demo data"}
             </span>
           </div>
           <p className="mt-2 line-clamp-2 text-sm text-muted">

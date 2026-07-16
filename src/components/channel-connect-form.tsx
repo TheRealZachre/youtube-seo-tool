@@ -14,7 +14,8 @@ export function ChannelConnectForm({
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const q = value.trim() || defaultChannel;
+    const q = value.trim();
+    if (!q) return;
     router.push(`/channel?channel=${encodeURIComponent(q)}`);
   }
 
@@ -32,7 +33,7 @@ export function ChannelConnectForm({
           id="channel-input"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="@BeOneMedicines"
+          placeholder="@handle or youtube.com/c/..."
           className="w-full rounded-lg border border-line bg-white py-2.5 pl-10 pr-3 text-sm text-ink outline-none ring-sky/30 focus:ring-2"
         />
       </div>

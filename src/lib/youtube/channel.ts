@@ -12,7 +12,7 @@ export async function analyzeChannel(
       return await fetchChannelFromYouTubeApi(channelInput, apiKey);
     } catch (error) {
       console.warn(
-        "[youtube] Live API failed, using BeOne seed fallback:",
+        "[youtube] Live API failed, using seed demo fallback:",
         error instanceof Error ? error.message : error
       );
     }
@@ -22,5 +22,5 @@ export async function analyzeChannel(
 }
 
 export function getDefaultChannelInput() {
-  return process.env.YOUTUBE_CHANNEL ?? DEFAULT_CHANNEL;
+  return process.env.YOUTUBE_CHANNEL ?? "";
 }

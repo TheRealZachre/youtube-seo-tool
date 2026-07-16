@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s · Vibe.Code.Flow.",
   },
   description:
-    "Connect a YouTube channel, score every video, generate SEO packages, and track visibility lift — defaulting to @BeOneMedicines.",
+    "Connect any YouTube channel, score every video, generate SEO packages, and track visibility lift.",
 };
 
 export default function RootLayout({
