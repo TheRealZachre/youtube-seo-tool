@@ -46,7 +46,7 @@ function LoginForm() {
           <img
             src="/vcf-logo-stacked.png"
             alt="Vibe.Code.Flow."
-            style={{ height: "80px", width: "auto", display: "inline-block" }}
+            style={{ height: "180px", width: "auto", display: "inline-block" }}
           />
           <p className="mt-3 text-sm text-sky-soft/60">YouTube SEO Platform</p>
         </div>

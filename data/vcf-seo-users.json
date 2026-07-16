@@ -8,6 +8,15 @@
       "passwordHash": "$2b$12$/X4nLsYxOZ3gS0xzMVSA4eGV/b9HwXpTUMmWBnM0TCVk5VZVr47Tq",
       "role": "admin",
       "createdAt": "2026-07-16T02:35:11.627Z"
+    },
+    {
+      "id": "5a653be4-fef2-44db-8cf0-ae9fab36b570",
+      "name": "Zach Randles1",
+      "email": "zach@zachre.com",
+      "username": "zach1",
+      "passwordHash": "$2b$12$SXcXVz78u53LogiosUFAR.af5n/7HiQrVw0OtE15Hff4oYrDX1Tyu",
+      "role": "admin",
+      "createdAt": "2026-07-16T03:04:20.061Z"
     }
   ]
 }
