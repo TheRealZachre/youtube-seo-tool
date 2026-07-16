@@ -1,35 +1,53 @@
 import Link from "next/link";
 import { NAV_LINKS, VCF_CONTACT_EMAIL, VCF_PRODUCT_NAME } from "@/lib/brand";
+import { getSession } from "@/lib/auth/session";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const session = await getSession();
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-cream/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
-        <Link href="/" className="group flex items-center gap-2.5" aria-label="Vibe.Code.Flow. home">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-navy-deep/95 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+        <Link href="/" className="group flex items-center" aria-label="Vibe.Code.Flow. home">
           <img
-            src="/vcf-wordmark.svg"
+            src="/vcf-logo-horizontal.png"
             alt="Vibe.Code.Flow."
-            height={28}
-            style={{ height: "28px", width: "auto", display: "block" }}
+            style={{ height: "36px", width: "auto", display: "block" }}
           />
-          <span className="hidden text-sm text-muted sm:inline">{VCF_PRODUCT_NAME}</span>
         </Link>
         <nav className="flex items-center gap-1 sm:gap-2">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-ink/80 transition hover:bg-sky/10 hover:text-navy"
+              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-white/70 transition hover:bg-white/10 hover:text-white"
             >
               {link.label}
             </Link>
           ))}
-          <a
-            href={`mailto:${VCF_CONTACT_EMAIL}`}
-            className="ml-1 hidden rounded-md bg-navy px-3 py-1.5 text-sm font-medium text-white transition hover:bg-sky sm:inline-block"
-          >
-            Contact
-          </a>
+          {session?.role === "admin" && (
+            <Link
+              href="/admin"
+              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-gold-soft transition hover:bg-gold/10"
+            >
+              Admin
+            </Link>
+          )}
+          {session ? (
+            <Link
+              href="/signout"
+              className="ml-1 rounded-md border border-white/20 px-3 py-1.5 text-sm font-medium text-white/60 transition hover:border-white/40 hover:text-white"
+            >
+              Sign out
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="ml-1 rounded-md bg-gold px-3 py-1.5 text-sm font-medium text-navy-deep transition hover:bg-gold-soft"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       </div>
     </header>
@@ -41,9 +59,9 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-line bg-navy-deep text-sky-soft/90">
       <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 sm:flex-row sm:items-center sm:justify-between">
         <img
-          src="/vcf-wordmark-white.svg"
+          src="/vcf-logo-stacked.png"
           alt="Vibe.Code.Flow."
-          style={{ height: "22px", width: "auto", display: "block", opacity: 0.9 }}
+          style={{ height: "52px", width: "auto", display: "block" }}
         />
         <p className="text-sm">
           <span className="text-sky-soft/60">{VCF_PRODUCT_NAME} · </span>

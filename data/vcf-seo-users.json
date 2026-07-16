@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "d6ca8561-843a-438a-9221-bd2c75b5427e",
+      "name": "Zach",
+      "email": "zach@vibecodeflow.com",
+      "username": "zach",
+      "passwordHash": "$2b$12$/X4nLsYxOZ3gS0xzMVSA4eGV/b9HwXpTUMmWBnM0TCVk5VZVr47Tq",
+      "role": "admin",
+      "createdAt": "2026-07-16T02:35:11.627Z"
+    }
+  ]
+}
