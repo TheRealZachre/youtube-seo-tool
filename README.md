@@ -51,7 +51,3 @@ npm run deploy
 
 - No auth wall in v1 — open demo like the SignalComms brief reference.
 - Visual system: navy / sky / gold with Vibe.Code.Flow. wordmark and contact.
-
-## Video Clips
-
-Opus-style AI clipping app lives in [`video-clips/`](./video-clips). Run it from that directory.
