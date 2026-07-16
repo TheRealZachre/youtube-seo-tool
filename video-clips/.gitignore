@@ -1,0 +1,16 @@
+node_modules
+.next
+.open-next
+.wrangler
+dist
+.env
+.env.local
+.env*.local
+data/*.json
+data/media
+apps/web/data/*.json
+apps/web/data/media
+services/worker/tmp
+*.log
+.DS_Store
+.fly
