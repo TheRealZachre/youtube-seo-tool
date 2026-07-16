@@ -126,3 +126,12 @@ export async function deleteUser(userId: string, actingUserId?: string): Promise
   db.users = db.users.filter((u) => u.id !== userId);
   await writeUsersDb(db);
 }
+
+export async function setUserPassword(userId: string, newPassword: string): Promise<void> {
+  if (newPassword.length < 8) throw new Error("Password must be at least 8 characters.");
+  const db = await readUsersDb();
+  const user = db.users.find((u) => u.id === userId);
+  if (!user) throw new Error("User not found.");
+  user.passwordHash = await bcrypt.hash(newPassword, 12);
+  await writeUsersDb(db);
+}

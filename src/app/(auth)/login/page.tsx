@@ -2,6 +2,7 @@
 
 import { useState, FormEvent, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 function LoginForm() {
   const router = useRouter();
@@ -96,6 +97,10 @@ function LoginForm() {
             >
               {loading ? "Signing in…" : "Sign in"}
             </button>
+
+            <Link href="/forgot-password" className="block text-center text-sm text-sky-soft/50 hover:text-white">
+              Forgot password?
+            </Link>
           </form>
         </div>
 
