@@ -1,0 +1,52 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "video-clips",
+  "workers_dev": true,
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-06-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "video-clips"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "video-clips",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "video-clips-media"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "CLIP_QUEUE",
+        "queue": "video-clips-jobs"
+      }
+    ]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "videoclips.vibecodeflow.com",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "CLOUDFLARE_WORKERS": "1"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@video-clips/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3010",
+    "build": "bash scripts/build.sh",
+    "build:cloudflare": "bash scripts/build.sh",
+    "deploy:cloudflare": "bash scripts/cloudflare-deploy.sh",
+    "deploy": "npm run build:cloudflare && npm run deploy:cloudflare",
+    "start": "next start --port 3010",
+    "lint": "eslint",
+    "setup:admin": "node scripts/seed-admin.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.850.0",
+    "@aws-sdk/s3-request-presigner": "^3.850.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@video-clips/shared": "*",
+    "bcryptjs": "^3.0.3",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "jose": "^6.2.3",
+    "lucide-react": "^0.525.0",
+    "next": "16.2.10",
+    "openai": "^6.47.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "^1.19.11",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "wrangler": "^4.101.0"
+  }
+}
