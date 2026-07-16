@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Fraunces, Source_Sans_3, Geist_Mono } from "next/font/google";
-import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import "./globals.css";
 
 const display = Fraunces({
@@ -40,9 +39,7 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="ambient flex min-h-full flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        {children}
       </body>
     </html>
   );
