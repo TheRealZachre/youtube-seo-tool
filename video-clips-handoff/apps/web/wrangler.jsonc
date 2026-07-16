@@ -15,28 +15,6 @@
       "service": "video-clips"
     }
   ],
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "video-clips",
-      "database_id": "00000000-0000-0000-0000-000000000000",
-      "migrations_dir": "migrations"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "video-clips-media"
-    }
-  ],
-  "queues": {
-    "producers": [
-      {
-        "binding": "CLIP_QUEUE",
-        "queue": "video-clips-jobs"
-      }
-    ]
-  },
   "observability": {
     "enabled": true
   },

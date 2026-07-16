@@ -126,3 +126,68 @@ export async function getGoogleRefreshToken(userId: string): Promise<string | un
   const user = await findUserById(userId);
   return user?.googleRefreshToken;
 }
+
+export async function isUserAdminById(id: string): Promise<boolean> {
+  const user = await findUserById(id);
+  return user?.role === "admin";
+}
+
+export async function deleteUser(userId: string, actingUserId?: string): Promise<void> {
+  const db = await readUsersDb();
+  const user = db.users.find((u) => u.id === userId);
+  if (!user) throw new Error("User not found.");
+  if (actingUserId && actingUserId === userId) throw new Error("You cannot delete your own account.");
+  const adminCount = db.users.filter((u) => u.role === "admin").length;
+  if (user.role === "admin" && adminCount <= 1) throw new Error("Cannot delete the only admin.");
+  db.users = db.users.filter((u) => u.id !== userId);
+  await writeUsersDb(db);
+}
+
+export async function updateUser(
+  userId: string,
+  input: { name?: string; email?: string; username?: string; role?: UserRole }
+): Promise<UserRecord> {
+  const db = await readUsersDb();
+  const user = db.users.find((u) => u.id === userId);
+  if (!user) throw new Error("User not found.");
+
+  if (input.name !== undefined) {
+    if (!input.name.trim()) throw new Error("Name is required.");
+    user.name = input.name.trim();
+  }
+  if (input.email !== undefined) {
+    const email = normalizeLogin(input.email);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Valid email required.");
+    if (db.users.some((u) => u.id !== userId && u.email === email)) throw new Error("Email already in use.");
+    user.email = email;
+  }
+  if (input.username !== undefined) {
+    const username = normalizeLogin(input.username);
+    if (username && !isValidUsername(username)) {
+      throw new Error("Username must be 3–32 chars: letters, numbers, dots, dashes, underscores.");
+    }
+    if (username && db.users.some((u) => u.id !== userId && u.username === username)) {
+      throw new Error("Username already taken.");
+    }
+    user.username = username || undefined;
+  }
+  if (input.role !== undefined) {
+    const adminCount = db.users.filter((u) => u.role === "admin").length;
+    if (user.role === "admin" && input.role !== "admin" && adminCount <= 1) {
+      throw new Error("Cannot remove admin role from the only admin.");
+    }
+    user.role = input.role;
+  }
+
+  await writeUsersDb(db);
+  return user;
+}
+
+export async function setUserPassword(userId: string, newPassword: string): Promise<void> {
+  if (newPassword.length < 8) throw new Error("Password must be at least 8 characters.");
+  const db = await readUsersDb();
+  const user = db.users.find((u) => u.id === userId);
+  if (!user) throw new Error("User not found.");
+  user.passwordHash = await bcrypt.hash(newPassword, 12);
+  await writeUsersDb(db);
+}

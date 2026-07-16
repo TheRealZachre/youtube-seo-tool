@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   transpilePackages: ["@video-clips/shared"],
@@ -9,6 +10,9 @@ const nextConfig: NextConfig = {
     ],
   },
   serverExternalPackages: ["@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
+  turbopack: {
+    root: path.join(__dirname, "../.."),
+  },
 };
 
 export default nextConfig;

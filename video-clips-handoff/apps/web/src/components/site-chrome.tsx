@@ -28,6 +28,14 @@ export async function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          {session?.role === "admin" && (
+            <Link
+              href="/admin"
+              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-gold-soft transition hover:bg-gold/10"
+            >
+              Admin
+            </Link>
+          )}
           {session ? (
             <Link
               href="/signout"
